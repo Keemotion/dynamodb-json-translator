@@ -44,12 +44,12 @@
   
   var Deserializers = {
        'S': function(v) { return String(v); },
-       'N': function(v) { return Number(v); },
+       'N': function(v) { return typeof v === 'string' ? v : Number(v); },
        'B': function(v) { return new Buffer(v, 'utf8'); },
     'BOOL': function(v) { return v ? true : false; },
     'NULL': function(v) { return null; },
       'SS': function(v) { return v.map(function(it) { return String(it); }); },
-      'NS': function(v) { return v.map(function(it) { return Number(it); }); },
+      'NS': function(v) { return v.map(function(it) { return typeof it === 'string' ? it : Number(it); }); },
       'BS': function(v) { return v.map(function(it) { return new Buffer(it, 'utf8'); }); },
        'L': function(v) { return v.map(function(it) { return Translator.toFlatJSON(it); }); },
        'M': function(v) { return deserializeMap(v); }
