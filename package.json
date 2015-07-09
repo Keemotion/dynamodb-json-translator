@@ -1,6 +1,6 @@
 {
   "name": "dynamodb-json-translator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Encoder and decoder from and to DynamoDB JSON and flat JSON",
   "main": "src/main.js",
   "scripts": {
@@ -10,5 +10,9 @@
   "license": "MIT",
   "devDependencies": {
     "buffer": "^3.3.1"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Keemotion/dynamodb-json-translator.git"
   }
 }
