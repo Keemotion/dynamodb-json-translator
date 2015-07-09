@@ -1,0 +1,6 @@
+﻿09.July.2015
+  - added documentation in the README.md
+  - guard against usage when Buffer class does not exist
+
+08.July.2015
+  - initial import
