@@ -124,6 +124,76 @@ describe('Translator', function() {
       })
       assert.deepEqual(translated, expected)
     })
+    // Any
+    it('should decode any value', function () {
+      var expected = {
+        'country_name': 'Romania',
+        'country_code': 'RO',
+        'contacts': [
+          {
+            'email': 'user.name@company.com',
+            'name': 'User Name',
+            'phone': '0032479236191'
+          },
+          {
+            'email': 'john.doe@company.com',
+            'name': 'John Doe',
+            'phone': '0040724000000'
+          }
+        ],
+        'gta_customer_id': '1005605042671477000999',
+        'timestamp': 1435323290
+      }
+      var input = {
+        'M': {
+          'country_name': {
+            'S': 'Romania'
+          },
+          'country_code': {
+            'S': 'RO'
+          },
+          'contacts': {
+            'L': [
+              {
+                'M': {
+                  'email': {
+                    'S': 'user.name@company.com'
+                  },
+                  'name': {
+                    'S': 'User Name'
+                  },
+                  'phone': {
+                    'S': '0032479236191'
+                  }
+                }
+              },
+              {
+                'M': {
+                  'email': {
+                    'S': 'john.doe@company.com'
+                  },
+                  'name': {
+                    'S': 'John Doe'
+                  },
+                  'phone': {
+                    'S': '0040724000000'
+                  }
+                }
+              }
+            ]
+          },
+          'gta_customer_id': {
+            'N': '1005605042671477000999'
+          },
+          'timestamp': {
+            'N': 1435323290
+          }
+        }
+      }
+      var translated = Translator.toFlatJSON(input)
+      assert.deepEqual(translated, expected)
+    })
+    
   })
 })
 
@@ -251,6 +321,75 @@ describe('Translator', function() {
         ]
       }
       var input = [23, 'my-string', true, false, {'x1':23.3, 'y1':12.75}]
+      var translated = Translator.toDynamoDBJSON(input)
+      assert.deepEqual(translated, expected)
+    })
+    // Any
+    it('should encode any value', function () {
+      var expected = {
+        'M': {
+          'country_name': {
+            'S': 'Romania'
+          },
+          'country_code': {
+            'S': 'RO'
+          },
+          'contacts': {
+            'L': [
+              {
+                'M': {
+                  'email': {
+                    'S': 'user.name@company.com'
+                  },
+                  'name': {
+                    'S': 'User Name'
+                  },
+                  'phone': {
+                    'S': '0032479236191'
+                  }
+                }
+              },
+              {
+                'M': {
+                  'email': {
+                    'S': 'john.doe@company.com'
+                  },
+                  'name': {
+                    'S': 'John Doe'
+                  },
+                  'phone': {
+                    'S': '0040724000000'
+                  }
+                }
+              }
+            ]
+          },
+          'gta_customer_id': {
+            'N': 1005605042671477000
+          },
+          'timestamp': {
+            'N': 1435323290
+          }
+        }
+      }
+      var input = {
+        'country_name': 'Romania',
+        'country_code': 'RO',
+        'contacts': [
+          {
+            'email': 'user.name@company.com',
+            'name': 'User Name',
+            'phone': '0032479236191'
+          },
+          {
+            'email': 'john.doe@company.com',
+            'name': 'John Doe',
+            'phone': '0040724000000'
+          }
+        ],
+        'gta_customer_id': 1005605042671477000,
+        'timestamp': 1435323290
+      }
       var translated = Translator.toDynamoDBJSON(input)
       assert.deepEqual(translated, expected)
     })
