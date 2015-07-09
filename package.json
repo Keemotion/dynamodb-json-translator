@@ -1,0 +1,14 @@
+{
+  "name": "dynamodb-json-translator",
+  "version": "1.0.0",
+  "description": "Encoder and decoder from and to DynamoDB JSON and flat JSON",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "ionut stoica",
+  "license": "MIT",
+  "devDependencies": {
+    "buffer": "^3.3.1"
+  }
+}
