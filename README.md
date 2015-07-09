@@ -2,10 +2,18 @@
 Browser/Node compatiblle libarary used for wrapping and unwrapping of DynamoDB AttributeValue to and from flat JSON
 
 
+## Installation
+
+```
+npm install dynamodb-json-translator
+npm test
+```
+
 ## Usage
 
   - `Translator.toFlatJSON`
   - `Translator.toDynamoDBJSON`
+
 
 ### 1) from DynamoDB JSON to flat JSON:
 
@@ -51,5 +59,22 @@ console.log(translated)
 
 ```
 
+
+## Description
+Implemented DynamoDB type prefixes are:
+
+- S - string
+- N - number
+- B - binary
+- BOOL - boolean
+- NULL - null(or undefined)
+- SS - string set
+- NS - number set
+- BS - binary set
+- L - list(list of attributes with DynamoDB types)
+- M - map(identical to JSON map, no DynamoDB prefixes)
+
 ## Notes
-  - SS, NS and BS are converted to DynamoDB format if and only if all values of the JSON array have the same type as the first element
+  - Set types for SS, NS and BS are converted to DynamoDB format if and only if all values of the JSON array have the same type as the first element
+  - Numeric ranges, string lengths and binary buffer behavior depends on the platform where they run
+  - Decided to use 3rd party `Buffer` implementation against the intrinsic **NodeJS** because it is easier to make it run in the browser(the class used is from https://github.com/feross/buffer)
