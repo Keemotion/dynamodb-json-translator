@@ -82,11 +82,11 @@ describe('Translator', function() {
       }
       var translated = Translator.toFlatJSON({
         'M': { 
-          'keyN': 32,
-          'keyS': 'the-string',
-          'bool': true, 
-          'array': [1, 2, 3], 
-          'map': {'k1': 'v1'}
+          'keyN': { 'N': 32 },
+          'keyS': { 'S': 'the-string' },
+          'bool': { 'BOOL': true },
+          'array': { 'L': [ {'N':1}, {'N':2}, {'N':3}] },
+          'map': { 'M': { 'k1': {'S': 'v1'} } }
         }
       })
       assert.deepEqual(translated, expected)
@@ -116,8 +116,8 @@ describe('Translator', function() {
           },
           {
             'M': {
-              'k1': 'v1',
-              'k2': 23
+              'k1': {'S': 'v1'},
+              'k2': {'N': 23}
             }
           }
         ]
@@ -218,11 +218,13 @@ describe('Translator', function() {
     it('should encode M(Map type)', function () {
       var expected = { 
         'M': {
-            'k1': 'v1', 
+            'k1': {'S': 'v1'},
             'k2': { 
-              'n': 23, 
-              'b': true, 
-              's': 'str' 
+              'M': {
+                'n': {'N':23},
+                'b': {'BOOL':true},
+                's': {'S':'str'}
+              }
             }
         }
       }
@@ -245,7 +247,7 @@ describe('Translator', function() {
           {'S': 'my-string'}, 
           {'BOOL': true}, 
           {'BOOL': false}, 
-          {'M': {'x1':23.3, 'y1':12.75}}
+          {'M': {'x1':{'N':23.3}, 'y1':{'N':12.75}}}
         ]
       }
       var input = [23, 'my-string', true, false, {'x1':23.3, 'y1':12.75}]

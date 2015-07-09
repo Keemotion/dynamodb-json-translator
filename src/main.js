@@ -18,6 +18,30 @@
   
 }('mod', function(Buffer) {
   
+  if (typeof Buffer === 'undefined') {
+    throw new Error('Cannot continue without a binary Buffer implementation')
+  }
+  
+  function deserializeMap(m) {
+    var items = {};
+    var keys = Object.keys(m);
+    for (var k in keys) {
+      var key = keys[k];
+      items[key] = Translator.toFlatJSON(m[key]);
+    }
+    return items;
+  }
+  
+  function serializeMap(m) {
+    var items = {'M': {}};
+    var keys = Object.keys(m);
+    for (var k in keys) {
+      var key = keys[k];
+      items['M'][key] = Translator.toDynamoDBJSON(m[key]);
+    }
+    return items;
+  }
+  
   var Deserializers = {
        'S': function(v) { return String(v); },
        'N': function(v) { return Number(v); },
@@ -28,7 +52,7 @@
       'NS': function(v) { return v.map(function(it) { return Number(it); }); },
       'BS': function(v) { return v.map(function(it) { return new Buffer(it, 'utf8'); }); },
        'L': function(v) { return v.map(function(it) { return Translator.toFlatJSON(it); }); },
-       'M': function(v) { return v; }
+       'M': function(v) { return deserializeMap(v); }
   };
   
   var Serializers = {
@@ -53,12 +77,11 @@
             } else if (buffers.length === v.length) {
               return {'BS': buffers};
             } else {
-              var values = v.map(function(it) { return Translator.toDynamoDBJSON(it); });
-              return {'L': values};
+              return {'L': v.map(function(it) { return Translator.toDynamoDBJSON(it); })};
             }
          },
     'uint8array': function(v) { return {'B': v}; },
-        'object': function(v) { return Buffer.isBuffer(v) ? {'B': v} : {'M': v}; }
+        'object': function(v) { return Buffer.isBuffer(v) ? {'B': v} : serializeMap(v); }
   };
   
   var Translator = {

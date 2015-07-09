@@ -1,6 +1,7 @@
 ﻿09.July.2015
-  - added documentation in the README.md
+  - fixed map translator implementation
   - guard against usage when Buffer class does not exist
+  - added documentation in the README.md
 
 08.July.2015
   - initial import
