@@ -62,6 +62,11 @@
   };
   
   var Translator = {
+    /**
+     * Convert to flat JSON from DynamoDB json
+     *
+     * @param {mixed} input - DynamoDB JSON value
+     */
     toFlatJSON: function(input) {
       if (typeof input !== 'object') {
         throw new Error('Invalid input, only objects are allowed');
@@ -78,6 +83,11 @@
       }
       return result;
     },
+    /**
+     * Convert to DynamoDB json from flat JSON
+     *
+     * @param {mixed} input - flat JSON value
+     */
     toDynamoDBJSON: function(input) {
       var tof = Translator.getJSTypeOf(input);
       if (tof in Serializers) {
