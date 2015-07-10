@@ -33,8 +33,8 @@ var translated = Translator.toFlatJSON({
     },
     {
       'M': {
-        'k1': 'v1',
-        'k2': 23
+        'k1': {'S': 'v1'},
+        'k2': {'N': 23}
       }
     }
   ]
