@@ -59,7 +59,7 @@
      'undefined': function(v) { return {'NULL': null}; },
           'null': function(v) { return {'NULL': null}; },
        'boolean': function(v) { return {'BOOL': v}; },
-        'number': function(v) { return {'N': v}; },
+        'number': function(v) { return {'N': String(v)}; },
         'string': function(v) { return {'S': v}; },
          'array': function(v) {
             // check if every element is Number => NS
