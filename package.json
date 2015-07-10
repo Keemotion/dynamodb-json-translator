@@ -1,6 +1,6 @@
 {
   "name": "dynamodb-json-translator",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Encoder and decoder from and to DynamoDB JSON and flat JSON",
   "main": "src/main.js",
   "scripts": {
