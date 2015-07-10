@@ -395,3 +395,56 @@ describe('Translator', function() {
     })
   })
 })
+
+describe('Translator', function() {
+  describe('getJSTypeOf', function () {
+    // undefined
+    it('should return "undefined" for undefined input', function () {
+      var expected = "undefined", input = undefined
+      var detected = Translator.getJSTypeOf(input)
+      assert.equal(detected, expected)
+    })
+    // null
+    it('should return "null" for null input', function () {
+      var expected = "null", input = null
+      var detected = Translator.getJSTypeOf(input)
+      assert.equal(detected, expected)
+    })
+    // Boolean
+    it('should return "boolean" for Boolean input', function () {
+      var expected = "boolean", input = true
+      var detected = Translator.getJSTypeOf(input)
+      assert.equal(detected, expected)
+    })
+    // Number
+    it('should return "number" for Number input', function () {
+      var expected = "number", input = 34
+      var detected = Translator.getJSTypeOf(input)
+      assert.equal(detected, expected)
+    })
+    // String
+    it('should return "string" for String input', function () {
+      var expected = "string", input = "a-string-input"
+      var detected = Translator.getJSTypeOf(input)
+      assert.equal(detected, expected)
+    })
+    // Array
+    it('should return "array" for Array input', function () {
+      var expected = "array", input = [1, 2, 3, 4]
+      var detected = Translator.getJSTypeOf(input)
+      assert.equal(detected, expected)
+    })
+    // uint8array
+    it('should return "uint8array" for Buffer input', function () {
+      var expected = "uint8array", input = new Buffer('abcd', 'utf8')
+      var detected = Translator.getJSTypeOf(input)
+      assert.equal(detected, expected)
+    })
+    // Object
+    it('should return "object" for Object input', function () {
+      var expected = "object", input = {'k': 'v'}
+      var detected = Translator.getJSTypeOf(input)
+      assert.equal(detected, expected)
+    })
+  })
+})
