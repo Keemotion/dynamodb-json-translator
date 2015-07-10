@@ -1,4 +1,8 @@
-﻿09.July.2015
+﻿10.July.2015
+  - fixed documentation
+  - fixed map translation
+
+09.July.2015
   - fixed map translator implementation
   - guard against usage when Buffer class does not exist
   - added documentation in the README.md
