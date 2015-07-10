@@ -1,6 +1,7 @@
 ﻿10.July.2015
   - fixed documentation
   - fixed map translation
+  - fixed large number support by keeping numbers as strings
 
 09.July.2015
   - fixed map translator implementation
