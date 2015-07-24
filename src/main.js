@@ -25,20 +25,20 @@
   function deserializeMap(m) {
     var items = {};
     var keys = Object.keys(m);
-    for (var k in keys) {
-      var key = keys[k];
-      items[key] = Translator.toFlatJSON(m[key]);
-    }
+    items = keys.reduce(function(object, key) {
+      object[key] = Translator.toFlatJSON(m[key]);
+      return object;
+    }, {});
     return items;
   }
   
   function serializeMap(m) {
     var items = {'M': {}};
     var keys = Object.keys(m);
-    for (var k in keys) {
-      var key = keys[k];
-      items['M'][key] = Translator.toDynamoDBJSON(m[key]);
-    }
+    items['M'] = keys.reduce(function(object, key) {
+      object[key] = Translator.toDynamoDBJSON(m[key]);
+      return object;
+    }, {});
     return items;
   }
   
